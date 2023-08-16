@@ -4,3 +4,7 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
+
+group :development do
+  gem 'rubocop', require: false
+end

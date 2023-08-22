@@ -11,7 +11,7 @@
 | first_name         | string | null: false               |
 | last_name_kana     | string | null: false               |
 | first_name_kana    | string | null: false               |
-| birthday           | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 
@@ -36,29 +36,28 @@
 
 ### Association
 
-- belongs_to :user
-- has_many   :shipping_addresses
+- has one :order
+
 
 
 ## shipping_address テーブル
 
-| Column       | Type       | Options                        |
-| -------      | ---------- | ------------------------------ |
-| postal_code  | string     | null: false                    |
-| prefecture   | string     | null: false                    |
-| city         | string     | null: false                    |
-| addresses    | string     | null: false                    |
-| phone_number | string     | null: false                    |
-| item         | references | null: false, foreign_key: true |
-| user         | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| -------       | ---------- | ------------------------------ |
+| postal_code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| address       | string     | null: false                    |
+| building      | string     |                                |
+| phone_number  | string     | null: false                    |
+| item          | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :item
-- has_one    :order
+- belongs_to :order
 
 
-## order テーブル
+## orders テーブル
 
 | Column        | Type       | Options                        |
 | -------       | ---------- | ------------------------------ |

@@ -36,6 +36,8 @@
 
 ### Association
 
+- belongs_to :user
+- belongs_to :item
 - has one :order
 
 
@@ -50,9 +52,10 @@
 | address       | string     | null: false                    |
 | building      | string     |                                |
 | phone_number  | string     | null: false                    |
-| item          | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
+
 
 - belongs_to :order
 

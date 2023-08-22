@@ -16,7 +16,6 @@
 ### Association
 
 - has_many :items
-- has_many :orders, through: :shipping_address
 - has_many :orders
 
 
@@ -37,7 +36,6 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :item
 - has one :order
 
 

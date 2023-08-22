@@ -4,41 +4,40 @@
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
-| nickname           | string | null: false, unique: true |   
-| email              | string | null: false               |
+| nickname           | string | null: false               |   
+| email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |  
 | last_name          | string | null: false               |
 | first_name         | string | null: false               |
 | last_name_kana     | string | null: false               |
 | first_name_kana    | string | null: false               |
-| birth_date         | string | null: false               |
+| birthday           | string | null: false               |
 
 ### Association
 
 - has_many :items
-- has_many :buy_item_info, through: :shipping_address
-- has_many :buy_item_info
+- has_many :orders, through: :shipping_address
+- has_many :orders
 
 
 ## items テーブル
 
-| Column                  | Type       | Options                        |
-| ----------              | ---------- | ------------------------------ |
-| item_image              | string     | null: false                    |
-| item_name               | string     | null: false                    |
-| item_info               | text       | null: false                    |
-| item_category           | string     | null: false                    |
-| item_sales_status       | string     | null: false                    |
-| item_shipping           | string     | null: false                    |
-| item_prefecture         | string     | null: false                    |
-| item_scheduled_delivery | string     | null: false                    |
-| item_price              | references | null: false, foreign_key: true |
-| user                    | references | null: false, foreign_key: true |
+| Column                     | Type       | Options                        |
+| ----------                 | ---------- | ------------------------------ |
+| item_name                  | string     | null: false                    |
+| item_info                  | text       | null: false                    |
+| item_category_id           | integer    | null: false                    |
+| item_sales_status_id       | integer    | null: false                    |
+| item_shipping_id           | integer    | null: false                    |
+| item_prefecture_id         | integer    | null: false                    |
+| item_scheduled_delivery_id | integer    | null: false                    |
+| price                      | integer    | null: false                    |
+| user                       | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_many   :shipping_address
+- belongs_to :user
+- has_many   :shipping_addresses
 
 
 ## shipping_address テーブル
@@ -55,21 +54,19 @@
 
 ### Association
 
-- belongs_to :items
-- belongs_to :buy_item_info
+- belongs_to :item
+- has_one    :order
 
 
-## buy_item_info テーブル
+## order テーブル
 
 | Column        | Type       | Options                        |
 | -------       | ---------- | ------------------------------ |
-| number_inform | string     | null: false                    |
-| expiry_form   | string     | null: false                    |
-| cvc_form      | string     | null: false                    |
 | item          | references | null: false, foreign_key: true |
 | user          | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :shipping_address
-- belongs_to :users
+- belongs_to :user
+- belongs_to :item
+- has_one    :shipping_address 

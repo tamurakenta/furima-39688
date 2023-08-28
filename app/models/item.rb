@@ -1,10 +1,10 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :order
-  has_one_attached :image
+  has_one_attached :item_image
 
 
-  validates :image, presence: true
+  validates :item_image, presence: true
 
   validates :item_name, presence: true
   validates :item_info, presence: true
@@ -16,7 +16,7 @@ class Item < ApplicationRecord
   validates :item_sales_status_id 
   validates :item_shipping_id
   validates :item_prefecture_id 
-  validates :item_scheduled_delivery_id
+  validates :item_category_id
  end
 end
 

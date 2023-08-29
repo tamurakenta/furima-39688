@@ -15,7 +15,7 @@ class Item < ApplicationRecord
   validates :item_info, presence: true
 
   with_options presence: true
-    validates :price, numericality: { only_integer:true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_99_999 },
+    validates :price, numericality: { only_integer:true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
                       presence: { message: "can't be blank" }
   end
 

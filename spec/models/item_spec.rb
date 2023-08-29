@@ -3,13 +3,11 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    @user = FactoryBot.build(:user)
   end
 
   describe '商品情報入力' do
     context '新規登録できるとき' do
     it '全ての値が正しく入力されていれば出品できること' do
-      item = FactoryBot.build(:item)
       expect(@item).to be_valid
     end
   end

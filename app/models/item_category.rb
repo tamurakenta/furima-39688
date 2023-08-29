@@ -11,10 +11,5 @@ class ItemCategory < ActiveHash::Base
     { id: 9, name: 'スポーツ・レジャー' },
     { id: 10, name: 'ハンドメイド' }
   ]
-
-  include ActiveHash::Associations
-
-  
-
   
   end

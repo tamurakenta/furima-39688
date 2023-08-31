@@ -20,10 +20,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-   is item.user_id == current_user.id
+   if @item.user_id == current_user.id
     @item.destroy
     redirect_to root_path
   end
+end
 
   def edit
     if @item.user_id != current_user.id
@@ -52,3 +53,4 @@ end
     params.require(:item).permit(:item_image, :item_name, :item_info, :item_category_id, :item_sales_status_id, :item_shipping_id, :item_prefecture_id, :item_scheduled_delivery_id, :price).merge(user_id: current_user.id)
   end
 end
+

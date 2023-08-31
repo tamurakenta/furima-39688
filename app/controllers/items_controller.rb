@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:edit, :show, :update]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
     
   def index
     @items = Item.all.order(created_at: :desc)
@@ -18,6 +18,13 @@ class ItemsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def destroy
+   if @item.user_id == current_user.id
+    @item.destroy
+  end
+  redirect_to root_path
+end
 
   def edit
     if @item.user_id != current_user.id
@@ -46,3 +53,4 @@ end
     params.require(:item).permit(:item_image, :item_name, :item_info, :item_category_id, :item_sales_status_id, :item_shipping_id, :item_prefecture_id, :item_scheduled_delivery_id, :price).merge(user_id: current_user.id)
   end
 end
+

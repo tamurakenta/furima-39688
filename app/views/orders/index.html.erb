@@ -1,4 +1,7 @@
+<%= include_gon %>
+
 <%= render "shared/second-header"%>
+
 
 <div class='transaction-contents'>
   <div class='transaction-main'>
@@ -7,14 +10,14 @@
     </h1>
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
-      <%= image_tag "item-sample.png", class: 'buy-item-img' %>
+      <%= image_tag @item.item_image, class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
-          <%= "商品名" %>
+          <%= @item.item_name %>
         </h2>
         <div class='buy-item-price'>
-          <p class='item-price-text'>¥<%= '999,999,999' %></p>
-          <p class='item-price-sub-text'><%= '配送料負担' %></p>
+          <p class='item-price-text'>¥<%= @item.price %></p>
+          <p class='item-price-sub-text'><%= @item.item_shipping.name %></p>
         </div>
       </div>
     </div>
@@ -26,12 +29,14 @@
         支払金額
       </h1>
       <p class='item-payment-price'>
-        ¥<%= "販売価格" %>
+        ¥<%= @item.price %>
       </p>
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with model: @order_shipping_address, url: item_orders_path, data: { turbo: false },id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+      <%= render 'error_messages', model: @order_shipping_address %>
+
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
@@ -86,7 +91,7 @@
           <label class="form-text">都道府県</label>
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:indispensable, [], :select_box, :prefecture, {}, {class:"select-box", id:"prefecture"}) %>
+        <%= f.collection_select(:item_prefecture_id,ItemPrefecture.all, :id, :name, {}, {class:"select-box", id:"item-prefecture"}) %>
       </div>
       <div class="form-group">
         <div class='form-text-wrap'>
@@ -100,7 +105,7 @@
           <label class="form-text">番地</label>
           <span class="indispensable">必須</span>
         </div>
-        <%= f.text_field :adresses, class:"input-default", id:"addresses", placeholder:"例）青山1-1-1"%>
+        <%= f.text_field :address, class:"input-default", id:"address", placeholder:"例）青山1-1-1"%>
       </div>
       <div class="form-group">
         <div class='form-text-wrap'>

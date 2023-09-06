@@ -1,5 +1,7 @@
 require "active_support/core_ext/integer/time"
 
+
+
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
@@ -7,6 +9,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.active_job.queue_adapter = :inline #追記
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true
   config.cache_classes = true

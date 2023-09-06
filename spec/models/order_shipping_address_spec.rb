@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe OrderShippingAddress, type: :model do
-  describe 'すべての値が正しく入力されていれば保存できること' do
+  describe '商品購入記録の保存' do
     before do
       user = FactoryBot.create(:user)
-      @order_shipping_address = FactoryBot.build(:order_shipping_address, user_id: user.id)
+      @item = FactoryBot.create(:item)
+      @order_shipping_address = FactoryBot.build(:order_shipping_address,user_id: user.id, item_id: @item.id)
     end
 
     context '内容に問題ない場合' do
@@ -55,6 +56,26 @@ RSpec.describe OrderShippingAddress, type: :model do
       end
       it 'userが紐付いていないと保存できないこと' do
         @order_shipping_address.user_id = nil
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("User can't be blank")
+      end
+      it '電話番号が9桁以下だと購入できないこと' do
+        @order_shipping_address.phone_number = '090123456'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number is invalid. Include hyphen(-)")
+      end
+      it '電話番号が12桁以上だと購入できない' do
+        @order_shipping_address.phone_number = '090123456789'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number is invalid. Include hyphen(-)")
+      end
+      it '電話番号が半角数値でないと購入できないこと' do
+        @order_shipping_address.phone_number = '０9012341234'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number is invalid. Include hyphen(-)")
+      end
+      it 'item_idが紐づいていなければ購入できないこと' do
+        @order_shipping_address.user_id = ''
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("User can't be blank")
       end

@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :set_item, only: [:index, :create, :prevent_url]
   before_action :authenticate_user!
   before_action :prevent_url, only: [:index, :create]
-  before_action :set_item, only: [:index, :create, :prevent_url]
 
 
   def index
@@ -27,6 +27,10 @@ class OrdersController < ApplicationController
 
   private
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
   def order_params
     params.require(:order_shipping_address).permit(:postal_code, :item_prefecture_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
   end
@@ -44,10 +48,6 @@ class OrdersController < ApplicationController
     if @item.user_id == current_user.id || @item.order != nil
       redirect_to root_path
     end
-  end
-
-  def set_item
-    @item = Item.find(params[:item_id])
   end
 
 end

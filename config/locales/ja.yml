@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+      item:
+        image: 画像
+        item_image: 商品画像
+        item_name: 商品名
+        item_info: 商品の状態
+        price: 価格
+        item_category_id: 商品カテゴリー
+        item_sales_status_id: 商品の状態
+        item_shipping_id: 発送元の地域
+        item_prefecture_id: 発送元の地域
+        item_scheduled_delivery_id: 発送までの日数
+      order:
+        city: 都道府県
+        address: 住所
+        token: トークン
+        phone_number: 電話番号
+        postal_code: 郵便番号
+        item_prefecture_id: 発送元の地域
+
+
+

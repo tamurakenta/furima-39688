@@ -14,10 +14,12 @@ ja:
         item_shipping_id: 発送元の地域
         item_prefecture_id: 発送元の地域
         item_scheduled_delivery_id: 発送までの日数
-      order:
+  activemodel:
+    attributes:
+      order_shipping_address:
         city: 都道府県
         address: 住所
-        token: トークン
+        token: クレジットカード情報
         phone_number: 電話番号
         postal_code: 郵便番号
         item_prefecture_id: 発送元の地域

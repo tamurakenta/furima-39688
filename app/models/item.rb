@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  has_many_attached :images
   belongs_to :user
   has_one :order
 
@@ -13,6 +14,9 @@ class Item < ApplicationRecord
   validates :item_image, presence: true
   validates :item_name, presence: true
   validates :item_info, presence: true
+  validates :images, presence: true
+  validates :images, length: { minimum: 1, maximum: 5, message: "は1枚以上5枚以下にしてください" }
+
 
   with_options presence: true do
     validates :price, numericality: { only_integer:true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },

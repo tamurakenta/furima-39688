@@ -97,5 +97,6 @@ gem 'gon'
 
 gem 'rails-i18n'
 
-
+gem 'ancestry'
+gem 'pry-rails'
 

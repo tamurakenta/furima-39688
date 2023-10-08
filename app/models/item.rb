@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
   has_one :order
+  has_ancestry
 
   belongs_to :item_category
   belongs_to :item_prefecture

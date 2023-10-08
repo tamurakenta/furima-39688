@@ -1,6 +1,8 @@
 class CreateItems < ActiveRecord::Migration[7.0]
   def change
     create_table :items do |t|
+      t.string :name
+      t.string :ancestry
       t.string :item_name, null: false
       t.text :item_info, null: false
       t.integer :item_category_id, null: false
